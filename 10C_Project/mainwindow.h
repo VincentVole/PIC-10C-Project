@@ -16,6 +16,13 @@ public:
     int instructions();
     ~MainWindow();
 
+private slots:
+    void on_startButton_clicked();
+
+    void on_instructionButton_clicked();
+
+    void on_backButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
