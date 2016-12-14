@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include "alien.h"
+#include "animal.h"
+#include "player.h"
 
 namespace Ui {
 class MainWindow;
