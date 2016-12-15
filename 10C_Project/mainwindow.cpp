@@ -2,8 +2,10 @@
 #include "ui_mainwindow.h"
 
 #include <QGraphicsScene>
+#include "player.h"
 
 QGraphicsScene* scene;
+player* p1;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -40,6 +42,12 @@ void MainWindow::on_startButton_clicked()
     ui->game->show();
     ui->instructionButton->hide();
     ui->startButton->hide();
+    p1 = new player();
+    p1->setPos(this->width()/2 - p1->width/2, this->height() - p1->height);
+    p1->setFlag(QGraphicsItem::ItemIsFocusable);
+    p1->setFocus();
+    scene->addItem(p1);
+
 }
 
 void MainWindow::on_instructionButton_clicked()
