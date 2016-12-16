@@ -1,6 +1,7 @@
 #include "alien.h"
 
 #include <QTimer>
+#include <QUrl>
 #include "bullet.h"
 
 alien::alien()
@@ -8,6 +9,10 @@ alien::alien()
     //sets some default values
     image = NULL;
     velocity = 2;
+    cleared = false;
+
+    //media player for alien sound effects
+    sfx = new QMediaPlayer();
 
     //creates timer to move alien
     QTimer *timer = new QTimer();
@@ -22,6 +27,14 @@ void alien::move(){
 
     else{//deletes once it hits the bottom and decrements health total
         emit down_hp();
+        sfx->setMedia(QUrl("qrc:/sound/Sound/splat.mp3"));
+        if(cleared){
+            sfx->setVolume(0);
+        }
+        else{
+            sfx->setVolume(50);
+        }
+        sfx->play();
         delete this;
         return;
     }
@@ -30,6 +43,14 @@ void alien::move(){
     for (int i=0, n=collisions.size(); i<n; ++i){
         if(typeid(*(collisions[i]))==typeid(bullet)){
             emit up_score();
+            sfx->setMedia(QUrl("qrc:/sound/Sound/splat.mp3"));
+            if(cleared){
+                sfx->setVolume(0);
+            }
+            else{
+                sfx->setVolume(50);
+            }
+            sfx->play();
             delete collisions[i];
             delete this;
             return;
@@ -53,4 +74,8 @@ void alien::set_image(int cat){
         setY(-1 * image->height());
         setPixmap(*image);
     }
+}
+
+void alien::mute(){
+    cleared = true;
 }

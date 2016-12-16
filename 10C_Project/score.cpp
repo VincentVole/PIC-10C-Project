@@ -9,7 +9,7 @@ score::score()
     setFont(QFont("times", 20));
     setDefaultTextColor(Qt::white);
     num_score = 0;
-    stage2_pts = 20;
+    stage2_pts = 3;
 }
 
 //increases score count

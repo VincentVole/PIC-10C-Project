@@ -3,6 +3,7 @@
 
 #include <QGraphicsRectItem>
 #include <QObject>
+#include <QMediaPlayer>
 
 
 class bullet : public QObject, public QGraphicsRectItem
@@ -15,6 +16,7 @@ public slots:
     void move();
 
 private:
+    QMediaPlayer* sfx;
     int velocity;
 };
 

@@ -4,6 +4,8 @@
 #include <QTimer>
 #include <QList>
 #include <QGraphicsItem>
+#include <QMediaPlayer>
+#include <QUrl>
 #include "animal.h"
 
 bullet::bullet(int x, int y)
@@ -13,6 +15,12 @@ bullet::bullet(int x, int y)
     setBrush(* new QBrush(Qt::blue));
 
     velocity = -5;
+
+    ///creates mediaplayer and plays bullet shooting sound effect
+    sfx = new QMediaPlayer();
+    sfx->setMedia(QUrl("qrc:/sound/Sound/pew.wav"));
+    sfx->setVolume(50);
+    sfx->play();
 
     //creates timer to move bullet
     QTimer *timer = new QTimer();

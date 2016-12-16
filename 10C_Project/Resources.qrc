@@ -10,5 +10,9 @@
     <qresource prefix="/sound">
         <file>Sound/06 Searching.mp3</file>
         <file>Sound/05 Come and Find Me.mp3</file>
+        <file>Sound/bark.mp3</file>
+        <file>Sound/meow.mp3</file>
+        <file>Sound/pew.wav</file>
+        <file>Sound/splat.mp3</file>
     </qresource>
 </RCC>

@@ -130,6 +130,7 @@ void MainWindow::spawn(){
         QObject::connect(rand_animal, SIGNAL(up_score()), the_score, SLOT(up_score()));
         QObject::connect(rand_animal, SIGNAL(down_hp()), hp, SLOT(down_hp()));
         QObject::connect(the_score, SIGNAL(next_stage()), rand_animal, SLOT(next_stage()));
+        QObject::connect(hp, SIGNAL(hp_zero()), rand_animal, SLOT(mute()));
     }
     else{//stage2 spawns both animals and aliens
         int friend_or_foe = qrand() % 2;//whether an animal or alien is spawned is randomly chosen
@@ -141,6 +142,7 @@ void MainWindow::spawn(){
             QObject::connect(rand_animal, SIGNAL(up_score()), the_score, SLOT(up_score()));
             QObject::connect(rand_animal, SIGNAL(down_hp()), hp, SLOT(down_hp()));
             QObject::connect(the_score, SIGNAL(next_stage()), rand_animal, SLOT(next_stage()));
+            QObject::connect(hp, SIGNAL(hp_zero()), rand_animal, SLOT(mute()));
         }
         else{//cat alien/dog alien is randomly chosen
             alien* rand_alien = new alien();
@@ -149,6 +151,7 @@ void MainWindow::spawn(){
             scene->addItem(rand_alien);
             QObject::connect(rand_alien, SIGNAL(up_score()), the_score, SLOT(up_score()));
             QObject::connect(rand_alien, SIGNAL(down_hp()), hp, SLOT(down_hp()));
+            QObject::connect(hp, SIGNAL(hp_zero()), rand_alien, SLOT(mute()));
         }
     }
 }
@@ -172,6 +175,7 @@ void MainWindow::next_stage(){
 void MainWindow::game_over(){
     delete ui->game;
     ui->game_over_text->show();
+    timer->stop();
     bgm->stop();
 }
 

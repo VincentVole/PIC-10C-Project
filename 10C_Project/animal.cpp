@@ -16,6 +16,11 @@ animal::animal()
     last_animal = false;
     velocity = 2;
     image = NULL;
+    dog = false;
+    cleared = false;
+
+    //media player for animal soudn effects
+    sfx = new QMediaPlayer();
 
     //creates timer to move animal object
     QTimer *timer = new QTimer();
@@ -27,6 +32,14 @@ void animal::move(){
         setY(y() + velocity);
     }
     else{//if it will be off screen, delete it and decrease number of lives by 1
+        sfx->setMedia(QUrl("qrc:/sound/Sound/splat.mp3"));
+        if(cleared){
+            sfx->setVolume(0);
+        }
+        else{
+            sfx->setVolume(50);
+        }
+        sfx->play();
         emit down_hp();
         delete this;
         return;
@@ -35,11 +48,38 @@ void animal::move(){
     for (int i=0, n=collisions.size(); i<n; ++i){
         if(typeid(*(collisions[i]))==typeid(player)){//delete if collides with player and increase score by 1
             emit up_score();
+            if(dog){
+                sfx->setMedia(QUrl("qrc:/sound/Sound/bark.mp3"));
+                if(cleared){
+                    sfx->setVolume(0);
+                }
+                else{
+                    sfx->setVolume(60);
+                }
+            }
+            else{
+                sfx->setMedia(QUrl("qrc:/sound/Sound/meow.mp3"));
+                if(cleared){
+                    sfx->setVolume(0);
+                }
+                else{
+                    sfx->setVolume(40);
+                }
+            }
+            sfx->play();
             delete this;
             return;
         }
         if(typeid(*(collisions[i]))==typeid(bullet)){//delete if collides with bullet, decrease number of lives by 1, and delete the colliding bullet
             emit down_hp();
+            sfx->setMedia(QUrl("qrc:/sound/Sound/splat.mp3"));
+            if(cleared){
+                sfx->setVolume(0);
+            }
+            else{
+                sfx->setVolume(50);
+            }
+            sfx->play();
             delete collisions[i];
             delete this;
             return;
@@ -62,6 +102,7 @@ void animal::set_image(int cat){
         *image = image->scaledToHeight(150);
         setY(-1 * image->height());
         setPixmap(*image);
+        dog = true;
     }
 }
 
@@ -77,4 +118,8 @@ void animal::next_stage(){
         delete this;
         return;
     }
+}
+
+void animal::mute(){
+    cleared = true;
 }
