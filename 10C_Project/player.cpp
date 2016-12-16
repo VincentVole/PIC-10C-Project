@@ -8,7 +8,10 @@
 player::player()
 {
     velocity = 0;
+    lives = 3;
     height = 175;
+    score = 0;
+    str_score = "";
     QString fileName("C:/Users/ureshineko/Desktop/10C Projects/PIC-10C-Project/10C_Project/Images/Basket Man.png");
     player_image = new QPixmap(fileName);
     *player_image = player_image->scaledToHeight(height);
@@ -36,6 +39,12 @@ void player::keyPressEvent(QKeyEvent * event){\
     }
     else if(event->key()== Qt::Key_Right){
         velocity += 3;
+        score++;
+        lives--;
+        str_lives = "Lives: " + QString::number(lives);
+        str_score = "Score: " + QString::number(score);
+        emit lives_changed(str_lives);
+        emit score_changed(str_score);
     }
 }
 void player::keyReleaseEvent(QKeyEvent * event){

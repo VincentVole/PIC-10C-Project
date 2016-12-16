@@ -2,10 +2,19 @@
 #include "ui_mainwindow.h"
 
 #include <QGraphicsScene>
+#include <QGraphicsTextItem>
+#include <QObject>
+#include <QFont>
+#include <QString>
 #include "player.h"
+#include "score.h"
+#include "lives.h"
 
 QGraphicsScene* scene;
 player* p1;
+score* the_score;
+lives* hp;
+animal* cat;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -47,6 +56,15 @@ void MainWindow::on_startButton_clicked()
     p1->setFlag(QGraphicsItem::ItemIsFocusable);
     p1->setFocus();
     scene->addItem(p1);
+    the_score = new score();
+    scene->addItem(the_score);
+    QObject::connect(p1, SIGNAL(score_changed(QString)), the_score, SLOT(chg_text(QString)));
+    hp = new lives();
+    hp->setY(hp->y() + 40);
+    scene->addItem(hp);
+    QObject::connect(p1, SIGNAL(lives_changed(QString)), hp, SLOT(chg_text(QString)));
+    cat = new animal();
+
 
 }
 

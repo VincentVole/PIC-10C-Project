@@ -16,11 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     animal.cpp \
     alien.cpp \
-    player.cpp
+    player.cpp \
+    score.cpp \
+    lives.cpp
 
 HEADERS  += mainwindow.h \
     animal.h \
     alien.h \
-    player.h
+    player.h \
+    score.h \
+    lives.h
 
 FORMS    += mainwindow.ui
