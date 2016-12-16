@@ -7,4 +7,8 @@
         <file>Images/City Background.jpg</file>
         <file>Images/Cat Head.png</file>
     </qresource>
+    <qresource prefix="/sound">
+        <file>Sound/06 Searching.mp3</file>
+        <file>Sound/05 Come and Find Me.mp3</file>
+    </qresource>
 </RCC>

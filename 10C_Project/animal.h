@@ -13,12 +13,14 @@ public:
     void set_image(int cat);
 public slots:
     void move();
+    void next_stage();
 signals:
     void up_score();
     void down_hp();
 private:
     QPixmap* image;
     int velocity;
+    bool last_animal;
 };
 
 #endif // ANIMAL_H

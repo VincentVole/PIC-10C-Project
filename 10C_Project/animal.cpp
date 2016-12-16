@@ -13,6 +13,7 @@
 
 animal::animal()
 {
+    last_animal = false;
     velocity = 2;
     image = NULL;
     QTimer *timer = new QTimer();
@@ -52,5 +53,18 @@ void animal::set_image(int cat){
         *image = image->scaledToHeight(150);
         setY(-1 * image->height());
         setPixmap(*image);
+    }
+}
+
+void animal::next_stage(){
+    QList<QGraphicsItem*> collisions = collidingItems();
+    for (int i=0, n=collisions.size(); i<n; ++i){
+        if(typeid(*(collisions[i]))==typeid(player)){
+            last_animal = true;
+        }
+    }
+    if(last_animal == false){
+        delete this;
+        return;
     }
 }

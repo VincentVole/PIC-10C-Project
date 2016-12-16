@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui \
+            multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,14 +19,16 @@ SOURCES += main.cpp\
     alien.cpp \
     player.cpp \
     score.cpp \
-    lives.cpp
+    lives.cpp \
+    bullet.cpp
 
 HEADERS  += mainwindow.h \
     animal.h \
     alien.h \
     player.h \
     score.h \
-    lives.h
+    lives.h \
+    bullet.h
 
 FORMS    += mainwindow.ui
 

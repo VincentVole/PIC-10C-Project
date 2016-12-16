@@ -32,8 +32,15 @@ private slots:
 
     void game_over();
 
+    void next_stage();
+
+    void on_nextButton_clicked();
+
+    void bullet_fired(int x, int y);
+
 private:
     Ui::MainWindow *ui;
+    int spawn_speed;
 };
 
 #endif // MAINWINDOW_H

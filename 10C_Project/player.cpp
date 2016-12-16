@@ -45,5 +45,8 @@ void player::keyReleaseEvent(QKeyEvent * event){
     else if(event->key()== Qt::Key_Right){
         velocity += -3;
     }
+    else if(event->key()== Qt::Key_Space){
+        emit bullet_fired((x() + player_image->width()/2), y());
+    }
 }
 

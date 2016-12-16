@@ -8,14 +8,22 @@
 #include <QString>
 #include <QTimer>
 #include <QTime>
+#include <QMediaPlayer>
+#include <QUrl>
+#include <QGraphicsRectItem>
+#include <QBrush>
 #include "player.h"
 #include "score.h"
 #include "lives.h"
+#include "bullet.h"
 
 QGraphicsScene* scene;
 player* p1;
 score* the_score;
 lives* hp;
+QTimer* timer;
+QMediaPlayer* bgm;
+QGraphicsRectItem* cover;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->instructionText->hide();
     ui->backButton->hide();
     ui->game->hide();
+    ui->stage2_instructions->hide();
+    ui->nextButton->hide();
     ui->game_over_text->hide();
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
@@ -66,12 +76,18 @@ void MainWindow::on_startButton_clicked()
     scene->addItem(hp);
     scene->addItem(the_score);
 
-    QTimer *timer = new QTimer();
+    spawn_speed = 1250;
+    timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(spawn_animal()));
-    timer->start(1250);
+    timer->start(spawn_speed);
     QObject::connect(hp, SIGNAL(hp_zero()), this, SLOT(game_over()));
 
+    QObject::connect(the_score, SIGNAL(next_stage()), this, SLOT(next_stage()));
 
+    bgm = new QMediaPlayer();
+    bgm->setMedia(QUrl("qrc:/sound/Sound/05 Come and Find Me.mp3"));
+    bgm->setVolume(40);
+    bgm->play();
 }
 
 void MainWindow::on_instructionButton_clicked()
@@ -97,9 +113,36 @@ void MainWindow::spawn_animal(){
     scene->addItem(rand_animal);
     QObject::connect(rand_animal, SIGNAL(up_score()), the_score, SLOT(up_score()));
     QObject::connect(rand_animal, SIGNAL(down_hp()), hp, SLOT(down_hp()));
+    QObject::connect(the_score, SIGNAL(next_stage()), rand_animal, SLOT(next_stage()));
+}
+
+void MainWindow::next_stage(){
+    timer->stop();
+    bgm->stop();
+    bgm->setMedia(QUrl("qrc:/sound/Sound/06 Searching.mp3"));
+    cover = new QGraphicsRectItem();
+    cover->setRect(-20,-20,840,640);
+    cover->setBrush(* new QBrush(Qt::white));
+    scene->addItem(cover);
+    ui->stage2_instructions->show();
+    ui->nextButton->show();
 }
 
 void MainWindow::game_over(){
     delete ui->game;
     ui->game_over_text->show();
+}
+
+void MainWindow::on_nextButton_clicked()
+{
+    ui->stage2_instructions->hide();
+    ui->nextButton->hide();
+    scene->removeItem(cover);
+    delete cover;
+    bgm->play();
+    timer->start();
+}
+
+void MainWindow::bullet_fired(int x, int y){
+
 }

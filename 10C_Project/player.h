@@ -23,7 +23,7 @@ public slots:
     void move();
 
 signals:
-
+    void bullet_fired(int x, int y);
 private:
     QPixmap* player_image;
     int velocity;
