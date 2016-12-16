@@ -18,6 +18,7 @@ public:
     void keyReleaseEvent(QKeyEvent * event);
     int height;
     int width;
+    bool stage2;
 
 public slots:
     void move();

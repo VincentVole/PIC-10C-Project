@@ -4,10 +4,11 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QGraphicsTextItem>
+
 #include "alien.h"
 #include "animal.h"
 #include "player.h"
-
 namespace Ui {
 class MainWindow;
 }
@@ -28,7 +29,7 @@ private slots:
 
     void on_backButton_clicked();
 
-    void spawn_animal();
+    void spawn();
 
     void game_over();
 

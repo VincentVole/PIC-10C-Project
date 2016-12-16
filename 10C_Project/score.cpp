@@ -4,13 +4,15 @@
 
 score::score()
 {
+    //sets some default values
     setPlainText("Score: 0");
     setFont(QFont("times", 20));
     setDefaultTextColor(Qt::white);
     num_score = 0;
-    stage2_pts = 2;
+    stage2_pts = 20;
 }
 
+//increases score count
 void score::up_score(){
     num_score++;
     if(num_score == stage2_pts){
