@@ -23,16 +23,10 @@ public slots:
     void move();
 
 signals:
-    void score_changed(QString score);
-    void lives_changed(QString lives);
 
 private:
     QPixmap* player_image;
-    int score;
-    int lives;
     int velocity;
-    QString str_score;
-    QString str_lives;
 };
 
 #endif // PLAYER_H

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsTextItem>
+#include <QString>
 
 
 class score : public QGraphicsTextItem, public QObject
@@ -11,7 +12,10 @@ class score : public QGraphicsTextItem, public QObject
 public:
     score();
 public slots:
-    void chg_text(QString new_score);
+    void up_score();
+private:
+    QString str_score;
+    int num_score;
 };
 
 #endif // SCORE_H

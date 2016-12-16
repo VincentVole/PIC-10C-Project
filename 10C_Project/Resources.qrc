@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>Images/Alien Cat Head.png</file>
+        <file>Images/Alien Dog Head.png</file>
+        <file>Images/Basket Man.png</file>
+        <file>Images/Dog Head.png</file>
+        <file>Images/City Background.jpg</file>
+        <file>Images/Cat Head.png</file>
+    </qresource>
+</RCC>

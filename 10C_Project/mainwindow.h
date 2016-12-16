@@ -28,6 +28,10 @@ private slots:
 
     void on_backButton_clicked();
 
+    void spawn_animal();
+
+    void game_over();
+
 private:
     Ui::MainWindow *ui;
 };

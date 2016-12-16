@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsTextItem>
+#include <QString>
 
 
 class lives : public QGraphicsTextItem, public QObject
@@ -11,7 +12,12 @@ class lives : public QGraphicsTextItem, public QObject
 public:
     lives();
 public slots:
-    void chg_text(QString new_lives);
+    void down_hp();
+signals:
+    void hp_zero();
+private:
+    int num_lives;
+    QString str_lives;
 };
 
 #endif // LIVES_H
